@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private const string SpeedX = "SpeedX";
-    private const string SpeedZ = "SpeedZ";
+    private const string SpeedXName = "SpeedX";
+    private const string SpeedZName = "SpeedZ";
 
     [SerializeField] private Animator animator = default;
     [SerializeField] private float acceleration = default;
@@ -29,7 +29,7 @@ public class Player : MonoBehaviour
             currentSpeed = 0.0f;
         }
 
-        animator.SetFloat(SpeedZ, Input.GetAxisRaw("Vertical") * currentSpeed);
-        animator.SetFloat(SpeedX, Input.GetAxisRaw("Horizontal") * currentSpeed);
+        animator.SetFloat(SpeedZName, Input.GetAxisRaw("Vertical") * currentSpeed);
+        animator.SetFloat(SpeedXName, Input.GetAxisRaw("Horizontal") * currentSpeed);
     }
 }
