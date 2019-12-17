@@ -967,9 +967,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 5958714007402212302}
-  acceleration: 0
-  minSpeed: 0
-  maxSpeed: 0
+  acceleration: 2
+  minSpeed: 0.5
+  maxSpeed: 3.4
+  rotationSpeed: 120
 --- !u!1 &5958714007409596518
 GameObject:
   m_ObjectHideFlags: 0

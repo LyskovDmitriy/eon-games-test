@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float acceleration = default;
     [SerializeField] private float minSpeed = default;
     [SerializeField] private float maxSpeed = default;
+    [SerializeField] private float rotationSpeed = default;
 
     private float currentSpeed;
 
@@ -31,5 +32,7 @@ public class Player : MonoBehaviour
 
         animator.SetFloat(SpeedZName, Input.GetAxisRaw("Vertical") * currentSpeed);
         animator.SetFloat(SpeedXName, Input.GetAxisRaw("Horizontal") * currentSpeed);
+
+        transform.Rotate(Vector3.up * Input.GetAxis("Mouse X") * rotationSpeed * Time.deltaTime);
     }
 }
