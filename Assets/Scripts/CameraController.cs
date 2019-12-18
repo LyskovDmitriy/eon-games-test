@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
@@ -24,7 +22,7 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
-        relativeRotation += Vector3.right * Input.GetAxis("Mouse Y") * rotationSpeed * Time.deltaTime;
+        relativeRotation += Vector3.left * Input.GetAxis("Mouse Y") * rotationSpeed * Time.deltaTime;
         relativeRotation.x = Mathf.Clamp(relativeRotation.x, minRotationX, maxRotationX);
     }
 
