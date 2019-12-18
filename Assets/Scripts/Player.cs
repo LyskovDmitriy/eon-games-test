@@ -6,12 +6,20 @@ public class Player : MonoBehaviour
     private const string SpeedZName = "SpeedZ";
 
     [SerializeField] private Animator animator = default;
+    [SerializeField] private Rigidbody body = default;
     [SerializeField] private float acceleration = default;
     [SerializeField] private float minSpeed = default;
     [SerializeField] private float maxSpeed = default;
     [SerializeField] private float rotationSpeed = default;
 
-    private float currentSpeed;
+
+    public float CurrentSpeed { get; private set; }
+
+
+    private void Awake()
+    {
+        body.maxAngularVelocity = 0.0f;
+    }
 
     private void Update()
     {
@@ -20,16 +28,16 @@ public class Player : MonoBehaviour
 
         if (!Mathf.Approximately(movementX, 0.0f) || !Mathf.Approximately(movementZ, 0.0f))
         {
-            currentSpeed = Mathf.Max(currentSpeed, minSpeed);
-            currentSpeed = Mathf.Min(maxSpeed, currentSpeed + acceleration * Time.deltaTime);
+            CurrentSpeed = Mathf.Max(CurrentSpeed, minSpeed);
+            CurrentSpeed = Mathf.Min(maxSpeed, CurrentSpeed + acceleration * Time.deltaTime);
         }
         else
         {
-            currentSpeed = 0.0f;
+            CurrentSpeed = 0.0f;
         }
 
-        animator.SetFloat(SpeedZName, Input.GetAxisRaw("Vertical") * currentSpeed);
-        animator.SetFloat(SpeedXName, Input.GetAxisRaw("Horizontal") * currentSpeed);
+        animator.SetFloat(SpeedZName, Input.GetAxisRaw("Vertical") * CurrentSpeed);
+        animator.SetFloat(SpeedXName, Input.GetAxisRaw("Horizontal") * CurrentSpeed);
 
         transform.Rotate(Vector3.up * Input.GetAxis("Mouse X") * rotationSpeed * Time.deltaTime);
     }
