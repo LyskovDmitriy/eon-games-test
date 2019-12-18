@@ -227,6 +227,7 @@ GameObject:
   - component: {fileID: 7160535778513247269}
   - component: {fileID: 6078387825301299073}
   - component: {fileID: 2830785706619644066}
+  - component: {fileID: 8008821340554686284}
   m_Layer: 0
   m_Name: Banner
   m_TagString: Untagged
@@ -293,3 +294,16 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &8008821340554686284
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8034878307406351579}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.01, y: 0.049266085, z: 0.0058802087}
+  m_Center: {x: 0, y: 0.019696094, z: 0.0000000038417056}

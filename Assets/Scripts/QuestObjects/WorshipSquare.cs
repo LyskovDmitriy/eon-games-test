@@ -36,6 +36,11 @@ public class WorshipSquare : QuestObject
 
     private void OnTriggerEnter(Collider other)
     {
+        if (WasActivated)
+        {
+            return;
+        }
+
         Player player = other.attachedRigidbody?.GetComponent<Player>();
         if (player != null)
         {
