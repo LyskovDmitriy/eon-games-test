@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class JumpBehavior : StateMachineBehaviour
 {
@@ -9,13 +7,25 @@ public class JumpBehavior : StateMachineBehaviour
     [SerializeField] private KeyCode jumpKey = default;
 
 
+    private bool isJumping;
+
+
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (Input.GetKeyDown(jumpKey))
+        if (Input.GetKeyDown(jumpKey) && !isJumping)
         {
             animator.SetTrigger(JumpTriggerName);
+            isJumping = true;
         }
 
         base.OnStateUpdate(animator, stateInfo, layerIndex);
+    }
+
+
+    public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        isJumping = false;
+
+        base.OnStateExit(animator, stateInfo, layerIndex);
     }
 }

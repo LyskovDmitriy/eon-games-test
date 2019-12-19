@@ -4,7 +4,6 @@ public class Player : MonoBehaviour
 {
     private const string SpeedXName = "SpeedX";
     private const string SpeedZName = "SpeedZ";
-    private const string SpeedYName = "SpeedY";
     private const string GroundedKey = "IsGrounded";
 
     [SerializeField] private Animator animator = default;
@@ -45,7 +44,6 @@ public class Player : MonoBehaviour
 
         animator.SetFloat(SpeedZName, Input.GetAxisRaw("Vertical") * CurrentSpeed);
         animator.SetFloat(SpeedXName, Input.GetAxisRaw("Horizontal") * CurrentSpeed);
-        animator.SetFloat(SpeedYName, body.velocity.y);
 
         transform.Rotate(Vector3.up * Input.GetAxis("Mouse X") * rotationSpeed * Time.deltaTime);
     }
