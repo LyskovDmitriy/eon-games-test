@@ -1017,10 +1017,11 @@ MonoBehaviour:
   animator: {fileID: 5958714007402212302}
   body: {fileID: 3564519326647706746}
   sword: {fileID: 8399068591671351508}
-  acceleration: 2
-  minSpeed: 0.5
+  acceleration: 3
+  minSpeed: 1
   maxSpeed: 3.4
   rotationSpeed: 120
+  stoppingSpeed: 10
   groundCheckRadius: 0.1
   groundCheckLayer:
     serializedVersion: 2

@@ -14,12 +14,14 @@ public class Player : MonoBehaviour
     [SerializeField] private float minSpeed = default;
     [SerializeField] private float maxSpeed = default;
     [SerializeField] private float rotationSpeed = default;
+    [SerializeField] private float stoppingSpeed = default;
     [Space]
     [SerializeField] private float groundCheckRadius = default;
     [SerializeField] private LayerMask groundCheckLayer = default;
 
 
-    public float CurrentSpeed { get; private set; }
+    public float CurrentSpeedX { get; private set; }
+    public float CurrentSpeedZ { get; private set; }
 
 
     private void Awake()
@@ -31,19 +33,47 @@ public class Player : MonoBehaviour
     {
         float movementX = Input.GetAxisRaw("Horizontal");
         float movementZ = Input.GetAxisRaw("Vertical");
-
-        if (!Mathf.Approximately(movementX, 0.0f) || !Mathf.Approximately(movementZ, 0.0f))
+ 
+        if (!Mathf.Approximately(movementX, 0.0f))
         {
-            CurrentSpeed = Mathf.Max(CurrentSpeed, minSpeed);
-            CurrentSpeed = Mathf.Min(maxSpeed, CurrentSpeed + acceleration * Time.deltaTime);
+            float movementSign = Mathf.Sign(movementX);
+
+            if (Mathf.Approximately(movementSign, Mathf.Sign(CurrentSpeedX)))
+            {
+                CurrentSpeedX = Mathf.Max(Mathf.Abs(CurrentSpeedX), minSpeed) * movementSign;
+                CurrentSpeedX = Mathf.Min(maxSpeed, Mathf.Abs(CurrentSpeedX + movementSign * acceleration * Time.deltaTime)) * movementSign;
+            }
+            else
+            {
+                CurrentSpeedX += movementSign * stoppingSpeed * Time.deltaTime;
+            }
         }
         else
         {
-            CurrentSpeed = 0.0f;
+            CurrentSpeedX = Mathf.MoveTowards(CurrentSpeedX, 0.0f, Time.deltaTime * stoppingSpeed);
         }
 
-        animator.SetFloat(SpeedZName, Input.GetAxisRaw("Vertical") * CurrentSpeed);
-        animator.SetFloat(SpeedXName, Input.GetAxisRaw("Horizontal") * CurrentSpeed);
+        if (!Mathf.Approximately(movementZ, 0.0f))
+        {
+            float movementSign = Mathf.Sign(movementZ);
+
+            if (Mathf.Approximately(movementSign, Mathf.Sign(CurrentSpeedZ)))
+            {
+                CurrentSpeedZ = Mathf.Max(Mathf.Abs(CurrentSpeedZ), minSpeed) * movementSign;
+                CurrentSpeedZ = Mathf.Min(maxSpeed, Mathf.Abs(CurrentSpeedZ + movementSign * acceleration * Time.deltaTime)) * movementSign;
+            }
+            else
+            {
+                CurrentSpeedZ += movementSign * stoppingSpeed * Time.deltaTime;
+            }
+        }
+        else
+        {
+            CurrentSpeedZ = Mathf.MoveTowards(CurrentSpeedZ, 0.0f, Time.deltaTime * stoppingSpeed);
+        }
+
+        animator.SetFloat(SpeedZName, CurrentSpeedZ);
+        animator.SetFloat(SpeedXName, CurrentSpeedX);
 
         transform.Rotate(Vector3.up * Input.GetAxis("Mouse X") * rotationSpeed * Time.deltaTime);
     }

@@ -15,8 +15,7 @@ public class WorshipSquare : QuestObject
 
         while (activationTimer < secondsToActivate)
         {
-
-            if (Mathf.Approximately(player.CurrentSpeed, 0.0f))
+            if (Mathf.Approximately(player.CurrentSpeedX, 0.0f) && Mathf.Approximately(player.CurrentSpeedZ, 0.0f))
             {
                 activationTimer += Time.deltaTime;
             }
