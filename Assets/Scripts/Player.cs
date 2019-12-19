@@ -4,6 +4,8 @@ public class Player : MonoBehaviour
 {
     private const string SpeedXName = "SpeedX";
     private const string SpeedZName = "SpeedZ";
+    private const string SpeedYName = "SpeedY";
+    private const string GroundedKey = "IsGrounded";
 
     [SerializeField] private Animator animator = default;
     [SerializeField] private Rigidbody body = default;
@@ -13,6 +15,9 @@ public class Player : MonoBehaviour
     [SerializeField] private float minSpeed = default;
     [SerializeField] private float maxSpeed = default;
     [SerializeField] private float rotationSpeed = default;
+    [Space]
+    [SerializeField] private float groundCheckRadius = default;
+    [SerializeField] private LayerMask groundCheckLayer = default;
 
 
     public float CurrentSpeed { get; private set; }
@@ -40,8 +45,15 @@ public class Player : MonoBehaviour
 
         animator.SetFloat(SpeedZName, Input.GetAxisRaw("Vertical") * CurrentSpeed);
         animator.SetFloat(SpeedXName, Input.GetAxisRaw("Horizontal") * CurrentSpeed);
+        animator.SetFloat(SpeedYName, body.velocity.y);
 
         transform.Rotate(Vector3.up * Input.GetAxis("Mouse X") * rotationSpeed * Time.deltaTime);
+    }
+
+
+    private void FixedUpdate()
+    {
+        animator.SetBool(GroundedKey, Physics.OverlapSphere(transform.position, groundCheckRadius, groundCheckLayer).Length != 0);
     }
 
 
