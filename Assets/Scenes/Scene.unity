@@ -243,6 +243,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: {fileID: 1129981274}
+  secondsToReloadLevelAfterFinish: 2
 --- !u!4 &399105139
 Transform:
   m_ObjectHideFlags: 0
@@ -664,9 +665,9 @@ MonoBehaviour:
   - {fileID: 6343139033620801955, guid: ea2746054754b134da507f98b6dd53b4, type: 3}
   questObjectsSpawnZoneBounds:
     m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 40, y: 0, z: 40}
-  minDistanceBetweenQuestObjects: 30
-  minQuestObjectDistanceToPlayer: 15
+    m_Extent: {x: 30, y: 0, z: 30}
+  minDistanceBetweenQuestObjects: 25
+  minQuestObjectDistanceToPlayer: 10
 --- !u!1 &1252050918
 GameObject:
   m_ObjectHideFlags: 0

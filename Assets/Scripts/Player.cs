@@ -7,6 +7,8 @@ public class Player : MonoBehaviour
 
     [SerializeField] private Animator animator = default;
     [SerializeField] private Rigidbody body = default;
+    [SerializeField] private Sword sword = default;
+    [Header("Movement")]
     [SerializeField] private float acceleration = default;
     [SerializeField] private float minSpeed = default;
     [SerializeField] private float maxSpeed = default;
@@ -41,4 +43,9 @@ public class Player : MonoBehaviour
 
         transform.Rotate(Vector3.up * Input.GetAxis("Mouse X") * rotationSpeed * Time.deltaTime);
     }
+
+
+    public void StartAttack() => sword.SetColliderEnabled(true);
+
+    public void FinishAttack() => sword.SetColliderEnabled(false);
 }

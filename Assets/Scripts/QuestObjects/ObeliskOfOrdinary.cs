@@ -39,7 +39,14 @@ public class ObeliskOfOrdinary : QuestObject
         Player player = other.attachedRigidbody?.GetComponent<Player>();
         if (player != null)
         {
-            activationCoroutine = StartCoroutine(Activation(player));
+            if (CanBeActivated)
+            {
+                activationCoroutine = StartCoroutine(Activation(player));
+            }
+            else
+            {
+                TryActivateInvalidObject();
+            }
         }
     }
 

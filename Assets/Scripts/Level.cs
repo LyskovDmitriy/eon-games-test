@@ -5,7 +5,7 @@ using Random = UnityEngine.Random;
 
 public class Level : MonoBehaviour
 {
-    public static event Action OnLevelFinished;
+    public static event Action OnFinished;
 
     [SerializeField] private CameraController mainCamera = default;
     [SerializeField] private LevelUi levelUi = default;
@@ -79,13 +79,29 @@ public class Level : MonoBehaviour
     }
 
 
+    public void Clear()
+    {
+        foreach (var questObject in questObjects)
+        {
+            Destroy(questObject.gameObject);
+        }
+
+        Destroy(player.gameObject);
+
+        questObjects.Clear();
+        enabledQuestObjectIndex = 0;
+
+        levelUi.ClearIcons();
+    }
+
+
     private void OnQuestObjectActivation()
     {
-        Debug.Log("Activate");
         enabledQuestObjectIndex++;
 
         if (enabledQuestObjectIndex == questObjects.Count)
         {
+            OnFinished?.Invoke();
         }
         else
         {
@@ -104,5 +120,6 @@ public class Level : MonoBehaviour
         }
 
         enabledQuestObjectIndex = 0;
+        questObjects[enabledQuestObjectIndex].SetActivationEnabled(true);
     }
 }

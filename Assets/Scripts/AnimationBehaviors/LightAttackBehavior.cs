@@ -16,7 +16,7 @@ public class LightAttackBehavior : StateMachineBehaviour
         {
             isAttacking = true;
             animator.SetTrigger(LightAttackTriggerName);
-            animator.SetInteger(LightAttackIndexName.Length, Random.Range(0, animationsCount));
+            animator.SetInteger(LightAttackIndexName, Random.Range(0, animationsCount));
         }
 
         base.OnStateUpdate(animator, stateInfo, layerIndex);

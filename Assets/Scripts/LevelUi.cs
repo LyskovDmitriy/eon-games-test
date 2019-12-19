@@ -8,6 +8,8 @@ public class LevelUi : MonoBehaviour
     [SerializeField] private Image iconPrefab = default;
     [SerializeField] private Transform iconsRoot = default;
 
+    private List<Image> icons = new List<Image>();
+
 
     public void CreateIcons(List<QuestObject> questObjects)
     {
@@ -16,6 +18,18 @@ public class LevelUi : MonoBehaviour
             Image icon = Instantiate(iconPrefab, iconsRoot);
             icon.sprite = questObject.Icon;
             icon.gameObject.SetActive(true);
+            icons.Add(icon);
         }
+    }
+
+
+    public void ClearIcons()
+    {
+        foreach (var icon in icons)
+        {
+            Destroy(icon.gameObject);
+        }
+
+        icons.Clear();
     }
 }

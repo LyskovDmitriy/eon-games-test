@@ -31,6 +31,7 @@ Transform:
   m_Children:
   - {fileID: 8207545710177898808}
   - {fileID: 8006219552177182421}
+  - {fileID: 7583274647185339784}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -47,6 +48,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 3e6cd44e6490191428819b36b038e092, type: 3}
+  activationEffectPrefab: {fileID: 198130314605359944, guid: 91a4af0a486a0734ba2d07393a8d3233,
+    type: 3}
+  invalidActivationEffectPrefab: {fileID: 198154895544516286, guid: 24f1778922bb4dd4e9ff05b70af84348,
+    type: 3}
+  effectsSpawnRoot: {fileID: 7583274647185339784}
   activationTrigger: {fileID: 5579231043240401035}
 --- !u!54 &4624328538214372765
 Rigidbody:
@@ -64,6 +70,36 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!1 &729682202023867977
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7583274647185339784}
+  m_Layer: 0
+  m_Name: EffectRoot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7583274647185339784
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 729682202023867977}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.06, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3081386282039468564}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5817655070002373186
 GameObject:
   m_ObjectHideFlags: 0

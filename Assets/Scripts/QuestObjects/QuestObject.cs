@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class QuestObject : MonoBehaviour
@@ -9,6 +8,11 @@ public class QuestObject : MonoBehaviour
 
 
     [SerializeField] private Sprite icon = default;
+    [SerializeField] private ParticleSystem activationEffectPrefab = default;
+    [SerializeField] private ParticleSystem invalidActivationEffectPrefab = default;
+    [SerializeField] private Transform effectsSpawnRoot = default;
+
+    private ParticleSystem activationEffect;
 
     protected bool WasActivated { get; private set; }
 
@@ -16,6 +20,13 @@ public class QuestObject : MonoBehaviour
     public Sprite Icon => icon;
 
     protected bool CanBeActivated { get; private set; }
+
+
+    private void Start()
+    {
+        activationEffect = Instantiate(activationEffectPrefab, effectsSpawnRoot.position, effectsSpawnRoot.rotation, effectsSpawnRoot);
+        activationEffect.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+    }
 
     public void SetActivationEnabled(bool canBeActivated)
     {
@@ -26,6 +37,7 @@ public class QuestObject : MonoBehaviour
     public virtual void Deactivate()
     {
         WasActivated = false;
+        activationEffect.Stop(true, ParticleSystemStopBehavior.StopEmitting);
     }
 
 
@@ -34,6 +46,14 @@ public class QuestObject : MonoBehaviour
         WasActivated = true;
         CanBeActivated = false;
 
+        activationEffect.Play(true);
         OnActivation?.Invoke();
+    }
+
+
+    protected void TryActivateInvalidObject()
+    {
+        Instantiate(invalidActivationEffectPrefab, effectsSpawnRoot.position, effectsSpawnRoot.rotation, effectsSpawnRoot);
+        OnInvalidObjectActivationTry?.Invoke();
     }
 }
